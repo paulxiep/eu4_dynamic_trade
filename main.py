@@ -128,7 +128,7 @@ def node_score(node_data, node_rank):
                 score += (1000**(len(FLOW_POWER_RULES)-1-i)) * (1000 - node_rank.get(node, 1000))
             if flow_power_rule == 'total_development':
                 score += (1000**(len(FLOW_POWER_RULES)-1-i)) * node_data[node]['tax'] + node_data[node]['production'] + node_data[node]['manpower']
-            if flow_power_rule == 'total_trade_power':
+            if flow_power_rule == 'total_provincial_trade_power':
                 score += (1000**(len(FLOW_POWER_RULES)-1-i)) * node_data[node]['trade_power']
         return score
     return get_score
