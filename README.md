@@ -1,6 +1,10 @@
 # eu4_dynamic_trade (alpha)
 
-## How to use
+### How to use (easy method, if you trust the exe)
+ 1. Simply download dynamic_trade.exe and settings.yaml to the same folder.
+ 2. Run dynamic_trade.exe after adjusting settings.yaml according to 2. of the safe method instructions.
+
+### How to use (safe method, using Python)
  1. Install miniconda if you don't yet have Python. Preferably get Python version 3.8.
  2. Open settings.yaml
     
