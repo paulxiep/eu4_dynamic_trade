@@ -197,7 +197,7 @@ if __name__ == '__main__':
                          [i for i in range(1, len(node_data.keys())+1)]))
     print('top 10 nodes:', list(node_rank.keys())[:10])
     end_nodes = list(node_rank.keys())[:N_END_NODES]
-    node_data = make_outgoing(END_NODE_RESTRICTION)(node_data, node_rank, end_nodes)
+    node_data = make_outgoing(END_NODE_RESTRICTION)(node_data, node_rank_by_country, end_nodes)
     nodes_text = gen_nodes_text(node_data)
     if not os.path.exists(os.path.join(mod_path, node_data_path)):
         os.makedirs(os.path.join(mod_path, node_data_path))
