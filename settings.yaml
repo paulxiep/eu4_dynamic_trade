@@ -1,0 +1,18 @@
+file_path:
+  eu4_mod_folder: /Users/paulx/Documents/Paradox Interactive/Europa Universalis IV/mod
+  game_folder: /Games/Steam/steamapps/common/Europa Universalis IV
+  mod_name: dynamic_trade
+  node_data_folder: /Games/Steam/steamapps/common/Europa Universalis IV/common/tradenodes
+  save_file: C:/Users/paulx/Documents/Paradox Interactive/Europa Universalis IV/save
+    games/Xie Kamchatka 4.eu4
+flow_rules:
+  end_node_restriction: restricted
+  equal_threshold: 1
+  flow_power_rules:
+  - country_development_mercantilism_cooperative
+  - quadratic_average_development
+  - average_development
+  - average_provincial_trade_power
+  - country_development_mercantilism
+  n_end_nodes: 3
+reload_save_data: true
