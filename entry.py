@@ -1,5 +1,6 @@
 import logging
 import os
+import multiprocessing
 from functools import partial
 from pathlib import Path
 from tkinter import *
@@ -96,6 +97,7 @@ def call_engine():
 
 
 if __name__ == '__main__':
+    multiprocessing.freeze_support()
     settings = load_settings()
     root_window = Tk()
     root_window.title('EU4 Dynamic Trade mod generator')
