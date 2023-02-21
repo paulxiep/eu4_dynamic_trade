@@ -7,9 +7,6 @@ from time import time
 
 import yaml
 
-with open('settings.yaml', 'r') as f:
-    save_file = yaml.safe_load(f)['file_path']['save_file']
-
 
 def get_province_data(save_data):
     try:
@@ -66,6 +63,8 @@ def get_country_data(country, save_data):
 
 
 def get_save_data():
+    with open('settings.yaml', 'r') as f:
+        save_file = yaml.safe_load(f)['file_path']['save_file']
     try:
         with ZipFile(save_file) as z:
             with z.open('gamestate', 'r') as f:

@@ -6,10 +6,7 @@ import yaml
 from get_save_data import get_save_data
 from util import *
 
-with open('settings.yaml', 'r') as f:
-    settings = yaml.safe_load(f)
-game_folder = settings['file_path']['game_folder']
-node_data_folder = settings['file_path']['node_data_folder']
+
 
 
 def find_close_bracket(string):
@@ -121,6 +118,10 @@ def prepare_node_data(node_data):
 
 
 def get_node_data():
+    with open('settings.yaml', 'r') as f:
+        settings = yaml.safe_load(f)
+    game_folder = settings['file_path']['game_folder']
+    node_data_folder = settings['file_path']['node_data_folder']
     with open(os.path.join(node_data_folder, '00_tradenodes.txt'), 'r') as f:
         node_data_text = f.read()
     return prepare_node_data(load_node_data(node_data_text))
