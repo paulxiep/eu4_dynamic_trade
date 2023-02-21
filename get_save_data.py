@@ -1,6 +1,7 @@
 import logging
 import os
 import re
+from zipfile import ZipFile
 from multiprocessing import Pool
 from time import time
 
@@ -53,38 +54,6 @@ def get_provinces_data(save_data):
     return {str(i + 1): results[i] for i in range(len(results))}
 
 
-# def get_provinces_data_old(save_data):
-#     province_data = {}
-#     i = 1
-#     save_data = save_data.split(f'-{i}='+'{', 1)[1]
-#     while i < 4940:
-#         save_data = save_data.split(f'-{i+1}='+'{\n', 1)
-#         try:
-#             owner = re.search('\n\t\towner="(\w+)"', save_data[0]).group(1)
-#         except:
-#             owner = None
-#         try:
-#             tax = int(re.search('base_tax=(\d*).', save_data[0]).group(1))
-#         except:
-#             tax = 1
-#         try:
-#             production = int(re.search('base_production=(\d*).', save_data[0]).group(1))
-#         except:
-#             production = 1
-#         try:
-#             manpower = int(re.search('base_manpower=(\d*).', save_data[0]).group(1))
-#         except:
-#             manpower = 1
-#         try:
-#             trade_power = float(re.search('trade_power=(\d*.\d*)\n', save_data[0]).group(1))
-#             province_data[str(i)] = {'tax': tax, 'production': production, 'manpower': manpower,
-#                                      'development': tax+production+manpower,
-#                                      'trade_power': trade_power, 'owner': owner}
-#         except:
-#             pass
-#         save_data = save_data[1]
-#         i += 1
-#     return province_data
 
 def get_country_data(country, save_data):
     if country is None:
@@ -94,13 +63,19 @@ def get_country_data(country, save_data):
             'trade_port': re.search('\t\ttrade_port=(\d*)\n', local_data).group(1),
             'power': float(re.search('\t\tgreat_power_score=(\d*.\d*)\n', local_data).group(1)),
             'mercantilism': float(re.search('\t\tmercantilism=(\d*.\d*)\n', local_data).group(1))}
-    # return (int(re.search('\t\traw_development=(\d*).', local_data).group(1)),
-    #         re.search('\t\ttrade_port=(\d*)\n', local_data).group(1))
 
 
 def get_save_data():
-    with open(save_file, 'r') as f:
-        save_data = f.read()
+    try:
+        with ZipFile(save_file) as z:
+            with z.open('gamestate', 'r') as f:
+                save_data = f.read().decode(errors='ignore')
+        logging.info('save file was compressed')
+    except:
+        logging.info('failed to load save as compressed file, trying as uncompressed')
+        with open(save_file, 'r') as f:
+            save_data = f.read()
+
     logging.info('save data read')
     last_time = time()
     province_data = get_provinces_data(save_data)
