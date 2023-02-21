@@ -210,6 +210,10 @@ def generate_mod():
         logging.info('nodes_text generated')
         return out
 
+    def gen_mod_text(eu4_mod_folder, mod_name):
+        return f'name = "dynamic_trade"\nnormal_or_historical_nations = yes\nsupported_version = "1.34.*"\npath = "{os.path.join(eu4_mod_folder, mod_name)}"'.replace('\\', '/')
+
+
     settings = load_settings()
     eu4_mod_folder = settings['file_path']['eu4_mod_folder']
     mod_name = settings['file_path']['mod_name']
@@ -247,8 +251,9 @@ def generate_mod():
         os.makedirs(os.path.join(eu4_mod_folder, node_data_folder))
     with open(os.path.join(eu4_mod_folder, mod_name, 'common/tradenodes', '00_tradenodes.txt'), 'w') as f:
         f.write(nodes_text)
+    with open(os.path.join(eu4_mod_folder, f'{mod_name}.mod'), 'w') as f:
+        f.write(gen_mod_text(eu4_mod_folder, mod_name))
     shutil.copy('descriptor.mod', os.path.join(eu4_mod_folder, mod_name, 'descriptor.mod'))
-    shutil.copy('dynamic_trade.mod', os.path.join(eu4_mod_folder, 'dynamic_trade.mod'))
 
 
 if __name__ == '__main__':
