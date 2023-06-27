@@ -193,8 +193,8 @@ def generate_mod():
     def gen_nodes_text(node_data):
         def gen_node_text(k, v):
             out = f'{k}=' + '{\n\tlocation=' + v['location'][0] + '\n\tinland=yes' * v['inland'] + '\n\t' \
-                  + reduce(str.__add__, ['outgoing={\n\t\tname=' + outgoing[0] \
-                                         + '\n\t\tpath={\n\t\t\t' + ' '.join(outgoing[1]) \
+                  + reduce(str.__add__, ['outgoing={\n\t\tname="' + outgoing[0] \
+                                         + '"\n\t\tpath={\n\t\t\t' + ' '.join(outgoing[1]) \
                                          + '\n\t\t}' \
                                          + '\n\t\tcontrol={\n\t\t\t' + ' '.join(outgoing[2]) \
                                          + '\n\t\t}' \

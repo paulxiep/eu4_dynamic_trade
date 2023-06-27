@@ -56,10 +56,10 @@ def get_country_data(country, save_data):
     if country is None:
         return {'development': 0, 'trade_port': None, 'great_power_score': 0, 'mercantilism': 0}
     local_data = save_data.split(f'\n\t{country}', 1)[1]
-    return {'development': int(re.search('\t\traw_development=(\d*).', local_data).group(1)),
-            'trade_port': re.search('\t\ttrade_port=(\d*)\n', local_data).group(1),
-            'power': float(re.search('\t\tgreat_power_score=(\d*.\d*)\n', local_data).group(1)),
-            'mercantilism': float(re.search('\t\tmercantilism=(\d*.\d*)\n', local_data).group(1))}
+    return {'development': int(re.search('\n\t\traw_development=(\d*).', local_data).group(1)),
+            'trade_port': re.search('\n\t\ttrade_port=(\d*)\n', local_data).group(1),
+            'power': float(re.search('\n\t\tgreat_power_score=(\d*.\d*)\n', local_data).group(1)),
+            'mercantilism': float(re.search('\n\t\tmercantilism=(\d*.\d*)\n', local_data).group(1))}
 
 
 def get_save_data():
